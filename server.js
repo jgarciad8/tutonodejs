@@ -23,6 +23,8 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/cliente.route")(app);
+require("./app/routes/proveedor.route")(app);
+require("./app/routes/producto.route")(app);
 
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {

@@ -1,5 +1,4 @@
 const dbConfig = require("../config/db.config.js");
-
 const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
@@ -26,6 +25,21 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+
 db.clientes = require("./cliente.model.js")(sequelize, Sequelize);
+db.proveedores = require("./proveedor.model.js")(sequelize, Sequelize);
+db.productos = require("./producto.model.js")(sequelize, Sequelize);
+
+
+db.proveedores.hasMany(db.productos, { 
+  as: "productos", 
+  foreignKey: "proveedorId" 
+});
+
+
+db.productos.belongsTo(db.proveedores, { 
+  as: "proveedor", 
+  foreignKey: "proveedorId" 
+});
 
 module.exports = db;
