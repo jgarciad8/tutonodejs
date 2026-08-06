@@ -1,10 +1,12 @@
-module.exports = {
-  HOST: "ep-summer-leaf-ayihhe0t-pooler.c-5.us-east-2.aws.neon.tech",
-  USER: "neondb_owner",
-  PASSWORD: "npg_Ix8NSOmCkD3Z",
-  DB: "neondb",
-  dialect: "postgres",
 
+module.exports = {
+  HOST: process.env.DB_HOST,
+  USER: process.env.DB_USER,
+  PASSWORD: process.env.DB_PASSWORD,
+  DB: process.env.DB_NAME,
+  dialect: process.env.DB_DIALECT || "postgres",
+  
+  ssl: process.env.DB_SSL === "true",
   pool: {
     max: 5,
     min: 0,
