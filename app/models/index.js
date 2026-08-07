@@ -1,7 +1,7 @@
 const dbConfig = require("../config/db.config.js");
 const Sequelize = require("sequelize");
 
-// Opciones de conexión
+
 const sequelizeOptions = {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
@@ -14,7 +14,7 @@ const sequelizeOptions = {
   }
 };
 
-// Solo agregar SSL cuando el .env lo indique
+
 if (dbConfig.ssl) {
   sequelizeOptions.dialectOptions = {
     ssl: {
@@ -24,7 +24,6 @@ if (dbConfig.ssl) {
   };
 }
 
-// Crear la conexión
 const sequelize = new Sequelize(
   dbConfig.DB,
   dbConfig.USER,
@@ -41,6 +40,7 @@ db.sequelize = sequelize;
 db.clientes = require("./cliente.model.js")(sequelize, Sequelize);
 db.proveedores = require("./proveedor.model.js")(sequelize, Sequelize);
 db.productos = require("./producto.model.js")(sequelize, Sequelize);
+db.usuarios = require("./usuario.model.js")(sequelize, Sequelize);
 
 // Relaciones
 db.proveedores.hasMany(db.productos, {
